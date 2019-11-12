@@ -55,14 +55,19 @@ def check_email(creds):
     return []
 
 
-def main():
-	creds = get_creds()
-	sender = 'rpi.notify.system@gmail.com'
-	recp = 'jacob.r.abraham@gmail.com'
+def cmd_ln_tool():
+    argparser = argparse.ArgumentParser(description='Send a test email')
+    argparser.add_argument('sender', type=str, help='Email to send from')
+    argparser.add_argument('recp', type=str, help='Email to send to')
+    args = argparser.parse_args()
+
+    creds = get_creds()
+	sender = args.sender
+	recp = args.recp
 	subject = 'Test Email'
-	body = "This is a test email\n\nSent via RPi"
+	body = "This is a test email"
 	send_email(creds, sender, recp, subject, body)
 
 
 if __name__ == '__main__':
-	main()
+	cmd_ln_tool()
