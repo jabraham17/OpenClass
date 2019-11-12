@@ -1,0 +1,22 @@
+from database import Database
+
+
+db = Database()
+db.open()
+db.add_user("asutest@asu.edu")
+db.add_user("gmailtest@gmail.com")
+db.add_course("CSE", "340", "11315", 0)
+db.add_course("CSE", "340", "19692", 1)
+db.add_course("CSE", "340", "19693", 1)
+db.add_course("CSE", "340", "19695", 0)
+db.add_course("CSE", "340", "29115", 1)
+db.add_course("CSE", "340", "14190", 0)
+db.add_course("CSE", "340", "19696", 1)
+db.add_course("CSE", "340", "19697", 1)
+db.add_course("CSE", "340", "19698", 0)
+db.watch_course("asutest@asu.edu", "CSE34011315")
+db.watch_course("asutest@asu.edu", "CSE34019695")
+db.watch_course("gmailtest@gmail.com", "CSE34019695")
+db.watch_course("gmailtest@gmail.com", "CSE34019693")
+db.unwatch_course("gmailtest@gmail.com", "CSE34019695")
+db.close()

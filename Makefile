@@ -6,7 +6,7 @@ GREEN=\033[0;32m
 RED=\033[0;31m
 COLOR_OFF=\033[0m
 
-all: 
+all: loadLibs
 	$(PYTHON) openclass.py
 
 # save external libs in requirements.txt

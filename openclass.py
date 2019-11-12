@@ -17,7 +17,7 @@ def get_driver():
            "profile.default_content_settings.images": 2,
            "disk-cache-size": 4096}
     options.add_experimental_option("prefs", prefs)
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     driver = webdriver.Chrome('chromedriver', chrome_options=options)
     return driver
 
@@ -60,9 +60,13 @@ def get_html(query_str, subject, code, section, semester):
 def get_parser(html_content):
     return BeautifulSoup(html_content, 'lxml')
 
+# true for open, false for closed
 def class_status(soup):
     # find column of table
     available_section = soup.find('td', class_='availableSeatsColumnValue')
+    # if availible
+    if available_section is not None:
+        return True
 
 
 def cmd_ln_tool():
@@ -75,7 +79,12 @@ def cmd_ln_tool():
     query = get_query_str()
     html = get_html(query, args.subject, args.code, args.section, args.s)
     soup = get_parser(html)
-    print(soup.prettify())
+    status = class_status(soup)
+    if status:
+        print("Class is open")
+    else:
+        print("Class is full")
+
 
 if __name__ == "__main__":
     cmd_ln_tool()
