@@ -84,6 +84,12 @@ class Database:
             WHERE user == '{userid}' AND course == '{courseid}';
         """)
 
+    def get_status(self, courseid):
+        return self.execute_sql(f"""
+            SELECT previousStatus FROM course
+            WHERE id == '{courseid}';
+        """)
+
     def update_status(self, newstatus, courseid):
         self.execute_sql(f"""
             UPDATE courseid
