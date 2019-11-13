@@ -127,7 +127,7 @@ def main():
     if new_emails:
         # we have new emails, need to mark them as unread and process
         ids = [m[1] for m in new_emails]
-        #email.mark_as_read(creds, ids)
+        email.mark_as_read(creds, ids)
         email_contents = [m[0] for m in new_emails]
         # STEP 2
         process_new_emails(db, email_contents)
