@@ -104,7 +104,7 @@ class Database:
 
     def update_status(self, newstatus, courseid):
         self.execute_sql(f"""
-            UPDATE courseid
+            UPDATE course
             SET previousStatus = '{newstatus}'
             WHERE id == '{courseid}';
         """)
@@ -146,6 +146,13 @@ class Database:
     def course_used(self, courseid):
         return self.execute_sql(f"""
             SELECT * FROM track
+            where course == '{courseid}';
+        """)
+    
+    # all users that are associated with this course
+    def associated_users(self, courseid):
+        return self.execute_sql(f"""
+            SELECT user FROM track
             where course == '{courseid}';
         """)
 
