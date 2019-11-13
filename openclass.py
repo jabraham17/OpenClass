@@ -43,7 +43,7 @@ def get_html(query_str, subject, code, section, semester):
     section_entry.send_keys(section)
 
     # search all classes
-    all_button = driver.find_element_by_id('searchTypeOpen')
+    all_button = driver.find_element_by_id('searchTypeAllClass')
     all_button.click()
 
     # search
@@ -65,8 +65,7 @@ def class_status(soup):
     # find column of table
     available_section = soup.find('td', class_='availableSeatsColumnValue')
     # if availible
-    if available_section is not None:
-        return True
+    return available_section is not None
 
 
 def cmd_ln_tool():
