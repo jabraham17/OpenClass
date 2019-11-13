@@ -7,7 +7,7 @@ RED=\033[0;31m
 COLOR_OFF=\033[0m
 
 all: loadLibs
-	$(PYTHON) openclass.py
+	$(PYTHON) main.py
 
 # save external libs in requirements.txt
 saveLibs: mkEnv
