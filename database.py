@@ -62,6 +62,18 @@ class Database:
             VALUES ('{email}');
         """)
 
+    def remove_user(self, email):
+        self.execute_sql(f"""
+            DELETE FROM user
+            WHERE user == '{email}';
+        """)
+
+    def remove_course(self, courseid):
+        self.execute_sql(f"""
+            DELETE FROM course
+            WHERE id == '{courseid}';
+        """)
+
     def add_course(self, subject, code, section, status):
         ID = str(subject) + str(code) + str(section)
         self.execute_sql(f"""
@@ -99,17 +111,49 @@ class Database:
 
     def all_courses(self):
         return self.execute_sql("""
-            SELECT * FROM course
+            SELECT * FROM course;
         """)
 
     def all_users(self):
         return self.execute_sql("""
-            SELECT * FROM user
+            SELECT * FROM user;
         """)
 
     def all_tracks(self):
         return self.execute_sql("""
+            SELECT * FROM track;
+        """)
+
+    def get_user(self, email):
+        return self.execute_sql(f"""
+            SELECT * FROM user
+            where email == '{email}';
+        """)
+
+    def get_course(self, ID):
+        return self.execute_sql(f"""
+            SELECT * FROM course
+            where id == '{ID}';
+        """)
+
+    def get_track(self, courseid, userid):
+        return self.execute_sql(f"""
             SELECT * FROM track
+            where user == '{userid}' AND course == '{courseid}';
+        """)
+    
+    # all tracks that are associated with the course
+    def course_used(self, courseid):
+        return self.execute_sql(f"""
+            SELECT * FROM track
+            where course == '{courseid}';
+        """)
+
+    # all tracks that are associated with the user
+    def user_used(self, userid):
+        return self.execute_sql(f"""
+            SELECT * FROM track
+            where user == '{userid}';
         """)
 
     # close the database
@@ -118,3 +162,4 @@ class Database:
         if self.connection is not None:
             self.connection.commit()
             self.connection.close()
+            self.connection = None
