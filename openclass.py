@@ -17,7 +17,7 @@ def get_driver():
            "profile.default_content_settings.images": 2,
            "disk-cache-size": 4096}
     options.add_experimental_option("prefs", prefs)
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
     driver = webdriver.Chrome('chromedriver', chrome_options=options)
     return driver
 
@@ -43,7 +43,7 @@ def get_html(query_str, subject, code, section, semester):
     section_entry.send_keys(section)
 
     # search all classes
-    all_button = driver.find_element_by_id('searchTypeAllClass')
+    all_button = driver.find_element_by_id('searchTypeOpen')
     all_button.click()
 
     # search
