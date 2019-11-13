@@ -11,7 +11,6 @@ from pprint import pprint, pformat
 import re
 
 # define the scopes that the app can access
-
 SCOPES = ['https://www.googleapis.com/auth/gmail.send',
         'https://www.googleapis.com/auth/gmail.readonly',
         'https://www.googleapis.com/auth/gmail.modify']
@@ -75,7 +74,11 @@ def extract_sender(msg):
     # this is a list of dicts, we want the one with our sender
     senders = [h['value'] for h in headers if h.get('name', None) == 'From']
     if senders:
-        return senders[0]
+        m = re.search('<([a-zA-Z0-9._%+-]+\@(?:[a-zA-Z0-9]+\.)+[a-zA-Z]{2,63})>', senders[0])
+        if m:
+            return m.group(1)
+        else:
+            return ''
     else:
         return ''
 
