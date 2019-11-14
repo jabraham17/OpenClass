@@ -10,15 +10,16 @@ def get_query_str():
 
 def get_driver():
     # web browser
-    options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
-    prefs = {"profile.managed_default_content_settings.images": 2, 
-           "profile.default_content_settings.images": 2,
-           "disk-cache-size": 4096}
-    options.add_experimental_option("prefs", prefs)
-    options.add_argument('--headless')
-    driver = webdriver.Chrome('chromedriver', chrome_options=options)
+    #options = webdriver.ChromeOptions()
+    #options.add_argument('--ignore-certificate-errors')
+    #options.add_argument('--incognito')
+    #prefs = {"profile.managed_default_content_settings.images": 2, 
+    #       "profile.default_content_settings.images": 2,
+    #       "disk-cache-size": 4096}
+    #options.add_experimental_option("prefs", prefs)
+    #options.add_argument('--headless')
+    #driver = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=options)
+    driver = webdriver.Firefox()
     return driver
 
 def get_html(query_str, subject, code, section, semester):
